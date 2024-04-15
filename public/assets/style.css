@@ -1,0 +1,44 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100dvh;
+    background-color: #000;
+}
+
+.error-msg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100dvh;
+    color: red;
+}
+
+.jw-skip {
+    zoom: 1.5;
+    border: 1px solid var(--base-color) !important;
+}
+
+.jw-skip .jw-text,
+.jw-skip .jw-icon {
+    color: var(--base-color) !important;
+}
+
+.btn-out-ads {
+    position: absolute;
+    bottom: 9em;
+    right: 1em;
+    padding: 0.5em;
+    font-weight: bold;
+    border: 1px solid var(--base-color) !important;
+}
+
+.jw-rightclick {
+    display: none !important;
+}
+
+.jw-logo {
+    max-height: 50px;
+}
