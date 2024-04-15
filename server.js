@@ -9,7 +9,7 @@ const path = require("path");
 
 const mongoose = require("mongoose");
 
-global.sv_type = "general";
+global.sv_type = "player";
 global.dir = __dirname;
 global.dirPublic = path.join(global.dir, "public");
 
