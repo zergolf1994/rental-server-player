@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="<%= lang %>">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title><%= title %></title>
+    <link
+      rel="preload"
+      href="https://ssl.p.jwpcdn.com/player/v/8.32.1/jwplayer.js"
+      as="script"
+    />
+    <script src="https://ssl.p.jwpcdn.com/player/v/8.32.1/jwplayer.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/p2p-media-loader-core@latest/build/p2p-media-loader-core.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/zergolf1994/p2p-jwplayer@main/p2p-media-loader-hlsjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/zergolf1994/p2p-jwplayer@main/hls.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/zergolf1994/p2p-jwplayer@main/jwplayer.hlsjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/zergolf1994/p2p-jwplayer@main/jwplayer.hlsjs.min.js"></script>
+    <script src="//<%= host %>/assets/player.js"></script>
+    
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="//<%= host %>/assets/style.css"
+    />
+    <style>
+      :root {
+        --base-color: <%= base_color %>;
+      }
+    </style>
+    
+    <style>
+      .jwplayer {
+        position: unset !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="jwplayer"></div>
+
+    <script>
+      //var id = 47756;
+      //const wrapper = document.getElementById("P2Pplayer");
+      const App = new AppPlayer();
+      App.init("<%= slug %>",<%- JSON.stringify(jwplayer) %>);
+      //renderPlayer(id);
+    </script>
+  </body>
+</html>

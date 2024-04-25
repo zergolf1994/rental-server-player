@@ -163,10 +163,11 @@ exports.getEmbed = async (req, res) => {
       throw new Error("We're processing this video. Check back later.");
 
     data.title = file.title;
+    data.slug = slug;
     data.jwplayer.sources = file.sources;
     data.jwplayer.image = `//${file.domain}/thumb/${slug}-5.jpg`;
 
-    return res.render("embed", data);
+    return res.render("embed_p2p", data);
   } catch (err) {
     let data = {
       title: `Player`,
