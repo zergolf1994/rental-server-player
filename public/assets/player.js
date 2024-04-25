@@ -43,7 +43,7 @@ class AppPlayer {
         maxBufferLength: 300,
         // useP2P: false,
         trackerAnnounce: [
-          "wss://tracker.openwebtorrent.com",
+          "wss://t2.77player.xyz",
         ],
       },
     };
