@@ -262,6 +262,15 @@ class AppPlayer {
       clientSide.qualitySwitch(e.level.index);
     });
 
+    player.once("play", function (e) {
+      const levels = player.getQualityLevels();
+      const current = player.getCurrentQuality();
+      if (levels?.length > 1) {
+        if (current != levels?.length - 1) {
+          player.setCurrentQuality(levels?.length - 1);
+        }
+      }
+    });
     /*player.on("bufferChange", (e) => {
       console.log(e);
     });*/
@@ -314,7 +323,7 @@ class AppPlayer {
     if (totalMb != 0) {
       var http_load = Number((httpMb * 100) / totalMb).toFixed(0);
       var p2p_load = Number((p2pMb * 100) / totalMb).toFixed(0);
-      //console.log("p2p_load",p2p_load)
+      console.log("p2p_load", p2p_load);
       /*$("#p2p-load").removeClass("p2p-none");
       if (p2p_load > 0) {
         $("#p2p-load").html("P2P " + p2p_load + " %");
