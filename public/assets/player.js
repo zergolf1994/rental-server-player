@@ -42,7 +42,10 @@ class AppPlayer {
         httpUseRanges: !0,
         maxBufferLength: 300,
         // useP2P: false,
-        trackerAnnounce: ["wss://tracker.openwebtorrent.com"],
+        trackerAnnounce: [
+          "ws://tracker.vdohide.com"
+          //"ws://tracker.openwebtorrent.com"
+        ],
         rtcConfig: {
           iceServers: [
             {
@@ -306,6 +309,7 @@ class AppPlayer {
     if (totalMb != 0) {
       var http_load = Number((httpMb * 100) / totalMb).toFixed(0);
       var p2p_load = Number((p2pMb * 100) / totalMb).toFixed(0);
+      //console.log("p2p_load",p2p_load)
       /*$("#p2p-load").removeClass("p2p-none");
       if (p2p_load > 0) {
         $("#p2p-load").html("P2P " + p2p_load + " %");
