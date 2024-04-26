@@ -16,6 +16,10 @@ class AppPlayer {
     this.player = jwplayer("jwplayer");
     const objSetup = {
       ...this.data,
+      /*advertising: {
+        tag: "",
+        client: "vast",
+      },*/
     };
     const segments_in_queue = 50;
     let engine_config = {
@@ -43,7 +47,8 @@ class AppPlayer {
         maxBufferLength: 300,
         // useP2P: false,
         trackerAnnounce: [
-          "ws://tracker.vdohide.com"
+          "ws://tracker.vdohide.com",
+          "wss://tracker.vdohide.com",
           //"ws://tracker.openwebtorrent.com"
         ],
         rtcConfig: {
