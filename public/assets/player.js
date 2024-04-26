@@ -42,9 +42,20 @@ class AppPlayer {
         httpUseRanges: !0,
         maxBufferLength: 300,
         // useP2P: false,
-        trackerAnnounce: [
-          "wss://t2.77player.xyz",
-        ],
+        trackerAnnounce: ["wss://tracker.openwebtorrent.com"],
+        rtcConfig: {
+          iceServers: [
+            {
+              urls: "stun:stun2.l.google.com:19302",
+            },
+            {
+              urls: "stun:stun3.l.google.com:19302",
+            },
+            {
+              urls: "stun:stun4.l.google.com:19302",
+            },
+          ],
+        },
       },
     };
 
@@ -69,7 +80,7 @@ class AppPlayer {
       this.player.setup(objSetup);
     }
 
-    this.jw_resume();
+    //this.jw_resume();
 
     this.jw_displays();
   }
@@ -131,7 +142,7 @@ class AppPlayer {
               this.svgLabel(item?.label),
               item?.label,
               function () {
-                document
+                /*document
                   .querySelector(".jw-controls")
                   .classList.add("jw-settings-open");
                 document
@@ -145,7 +156,7 @@ class AppPlayer {
                   .setAttribute("aria-expanded", true);
                 document
                   .querySelector(".jw-settings-quality")
-                  .setAttribute("aria-checked", true);
+                  .setAttribute("aria-checked", true);*/
               },
               "qSwitch"
             );
@@ -242,6 +253,10 @@ class AppPlayer {
     player.on("visualQuality", function (e) {
       clientSide.qualitySwitch(e.level.index);
     });
+
+    /*player.on("bufferChange", (e) => {
+      console.log(e);
+    });*/
   }
 
   onBytesDownloaded(method, size) {
@@ -291,7 +306,6 @@ class AppPlayer {
     if (totalMb != 0) {
       var http_load = Number((httpMb * 100) / totalMb).toFixed(0);
       var p2p_load = Number((p2pMb * 100) / totalMb).toFixed(0);
-      //console.log("p2p_load", p2p_load);
       /*$("#p2p-load").removeClass("p2p-none");
       if (p2p_load > 0) {
         $("#p2p-load").html("P2P " + p2p_load + " %");
