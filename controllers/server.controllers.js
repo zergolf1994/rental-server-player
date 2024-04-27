@@ -2,6 +2,7 @@ const { ServerModel } = require("../models/server.models");
 const fs = require("fs-extra");
 const { get_os, get_disk } = require("../utils/os");
 const { getLocalServer } = require("../utils/server.utils");
+const { PlayerModel } = require("../models/player.models");
 
 exports.serverDetail = async (req, res) => {
   try {
@@ -68,5 +69,20 @@ exports.updateDisk = async (req, res) => {
       error: true,
       msg: error?.message,
     });
+  }
+};
+
+exports.domainConnect = async (req, res) => {
+  try {
+    const domain = req.get("host");
+
+    const updateDb = await PlayerModel.updateOne(
+      { domain },
+      { isConnect: true }
+    );
+    if (!updateDb?.matchedCount) throw new Error("wrong!");
+    return res.json({ msg: `${domain} connected` });
+  } catch (err) {
+    return res.json({ error: true, msg: err?.message });
   }
 };

@@ -5,7 +5,6 @@ const router = express.Router();
 
 router.get("/embed/:slug", getEmbed);
 router.get("/v/:slug", getEmbed);
-
 router.use("/server", require("./server.routes"));
 
 router.all("*", async (req, res) => {
