@@ -26,6 +26,10 @@ body {
     color: var(--base-color) !important;
 }
 
+.jw-cue {
+    background-color: var(--base-color) !important;
+}
+
 .btn-out-ads {
     position: absolute;
     bottom: 9em;

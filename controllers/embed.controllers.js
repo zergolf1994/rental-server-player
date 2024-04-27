@@ -1,12 +1,15 @@
 const { FileModel } = require("../models/file.models");
+const { PlayerModel } = require("../models/player.models");
 
 exports.getEmbed = async (req, res) => {
   try {
     const { slug } = req.params;
-
+    const domain =
+      req.get("host") == "localhost" ? "player.vdohide.com" : req.get("host");
     let data = {
       title: `Player`,
       base_color: `#ff0000`,
+      base_color2: `#ff00`,
       host: req.get("host"),
       lang: "th",
       jwplayer: {
@@ -17,10 +20,19 @@ exports.getEmbed = async (req, res) => {
         primary: "html5",
         hlshtml: "true",
         controls: "true",
-        pipIcon: "true",
         horizontalVolumeSlider: true,
       },
+      options: {},
     };
+    // get player data
+
+    const player = await PlayerModel.findOne({ domain });
+    if (!player) {
+      const error = new Error("This domain doesn't exist.");
+      error.code = 404;
+      throw error;
+    }
+
     const files = await FileModel.aggregate([
       { $match: { slug } },
       { $limit: 1 },
@@ -164,9 +176,28 @@ exports.getEmbed = async (req, res) => {
 
     data.title = file.title;
     data.slug = slug;
+
     data.jwplayer.sources = file.sources;
     data.jwplayer.image = `//${file.domain}/thumb/${slug}-5.jpg`;
 
+    if (player?.player_options?.video_title) data.jwplayer.title = file.title;
+    if (player?.player_options?.video_mute) data.jwplayer.mute = true;
+
+    if (player?.player_options?.video_continue)
+      data.options.video_continue = true;
+
+    data.jwplayer.skin = {
+      controlbar: {
+        iconsActive: data?.base_color,
+      },
+      timeslider: {
+        progress: data?.base_color,
+      },
+      menus: {
+        background: "#121212",
+        textActive: data?.base_color,
+      },
+    };
     return res.render("embed_p2p", data);
   } catch (err) {
     let data = {

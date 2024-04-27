@@ -16,18 +16,7 @@ exports.PlayerModel = mongoose.model(
       adverts: { type: Array },
       player_options: {
         type: Object,
-        default: {
-          block_direct: { type: Boolean, default: false },
-          block_devtools: { type: Boolean, default: false },
-          video_title: { type: Boolean, default: false },
-          video_mute: { type: Boolean, default: false },
-          video_repeat: { type: Boolean, default: false },
-          video_autoplay: { type: Boolean, default: false },
-          video_continue: { type: Boolean, default: false },
-          video_button_chromecast: { type: Boolean, default: false },
-          video_button_download: { type: Boolean, default: false },
-          video_button_pip: { type: Boolean, default: false },
-        },
+        default: {},
       },
     },
     {

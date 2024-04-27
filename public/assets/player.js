@@ -1,7 +1,8 @@
 class AppPlayer {
-  init(id, data) {
+  init(id, data, options = {}) {
     this.id = id;
     this.data = data;
+    this.option = options;
 
     this.isP2PSupported = Hls.isSupported() && p2pml.hlsjs.Engine.isSupported();
     if (this.isP2PSupported) {
@@ -26,7 +27,7 @@ class AppPlayer {
       debug: !1,
       segments: {
         forwardSegmentCount: 50,
-        swarmId:`vdohide-${this.id}`
+        swarmId: `vdohide-${this.id}`,
       },
       loader: {
         cachedSegmentExpiration: 864e5,
@@ -89,13 +90,15 @@ class AppPlayer {
       this.player.setup(objSetup);
     }
 
-    //this.jw_resume();
+    if (this.option.video_continue) {
+      this.jw_resume();
+    }
 
     this.jw_displays();
   }
 
   jw_resume() {
-    const resumeData = "VdoHide-" + this.id;
+    const resumeData = "vdohide-" + this.id;
     const player = this.player;
     player.on("ready", function () {
       if (typeof Storage !== "undefined") {
