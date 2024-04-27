@@ -26,6 +26,7 @@ class AppPlayer {
       debug: !1,
       segments: {
         forwardSegmentCount: 50,
+        swarmId:`vdohide-${this.id}`
       },
       loader: {
         cachedSegmentExpiration: 864e5,
