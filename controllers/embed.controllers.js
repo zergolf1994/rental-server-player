@@ -7,7 +7,7 @@ exports.getEmbed = async (req, res) => {
   try {
     const { slug } = req.params;
     const domain =
-      req.get("host") == "localhost" ? "online.playhls.xyz" : req.get("host");
+      req.get("host") == "localhost" ? "player.vdohide.com" : req.get("host");
     let data = {
       title: `Player`,
       base_color: `#ff0000`,
@@ -36,11 +36,11 @@ exports.getEmbed = async (req, res) => {
 
     // get user data
     const user = await UserModel.findOne({ _id: player.userId });
-    if (!user) {
+    /*if (!user) {
       const error = new Error("This user doesn't exist.");
       error.code = 404;
       throw error;
-    }
+    }*/
 
     const files = await FileModel.aggregate([
       { $match: { slug } },
@@ -189,6 +189,8 @@ exports.getEmbed = async (req, res) => {
       //user advert
       const remain = remaining(user?.exp_date);
       if (remain > 0) user_ad = true;
+    } else if (!user) {
+      user_ad = true;
     }
 
     data.title = file.title;
