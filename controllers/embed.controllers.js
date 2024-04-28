@@ -1,11 +1,13 @@
 const { FileModel } = require("../models/file.models");
 const { PlayerModel } = require("../models/player.models");
+const { UserModel } = require("../models/user.models");
+const { remaining } = require("../utils/date");
 
 exports.getEmbed = async (req, res) => {
   try {
     const { slug } = req.params;
     const domain =
-      req.get("host") == "localhost" ? "player.vdohide.com" : req.get("host");
+      req.get("host") == "localhost" ? "online.playhls.xyz" : req.get("host");
     let data = {
       title: `Player`,
       base_color: `#ff0000`,
@@ -25,10 +27,17 @@ exports.getEmbed = async (req, res) => {
       options: {},
     };
     // get player data
-
     const player = await PlayerModel.findOne({ domain });
     if (!player) {
       const error = new Error("This domain doesn't exist.");
+      error.code = 404;
+      throw error;
+    }
+
+    // get user data
+    const user = await UserModel.findOne({ _id: player.userId });
+    if (!user) {
+      const error = new Error("This user doesn't exist.");
       error.code = 404;
       throw error;
     }
@@ -159,6 +168,7 @@ exports.getEmbed = async (req, res) => {
           encoding: 1,
           sources: 1,
           domain: 1,
+          categoryId: 1,
         },
       },
     ]);
@@ -173,6 +183,13 @@ exports.getEmbed = async (req, res) => {
     if (!file.ready && !file.encoding) throw new Error("Formatting video");
     if (!file.ready && file.encoding)
       throw new Error("We're processing this video. Check back later.");
+
+    let user_ad = false;
+    if (user?.categorys.includes(file.categoryId)) {
+      //user advert
+      const remain = remaining(user?.exp_date);
+      if (remain > 0) user_ad = true;
+    }
 
     data.title = file.title;
     data.slug = slug;
@@ -198,6 +215,31 @@ exports.getEmbed = async (req, res) => {
         textActive: data?.base_color,
       },
     };
+
+    if (user_ad === true) {
+      //user
+      /*data.jwplayer.advertising = {
+        client: "vast",
+        schedule: [
+          {
+            offset: "pre",
+            tag: `//${data.host}/assets/advertising.xml`,
+          },
+        ],
+      };*/
+    } else {
+      //website
+      data.jwplayer.advertising = {
+        client: "vast",
+        schedule: [
+          {
+            offset: "pre",
+            tag: `//${data.host}/assets/advertising.xml`,
+          },
+        ],
+      };
+    }
+
     return res.render("embed_p2p", data);
   } catch (err) {
     let data = {
