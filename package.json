@@ -23,6 +23,7 @@
     "mime-types": "^2.1.35",
     "mongoose": "^8.2.1",
     "request": "^2.88.2",
+    "ua-parser-js": "^1.0.37",
     "uuid": "^9.0.1"
   }
 }
