@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
   <head>
     <meta charset="utf-8" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mobile-detect/1.4.5/mobile-detect.min.js"></script>
@@ -11,33 +11,73 @@
       href="https://content.jwplatform.com/libraries/foHt6P0J.js"
       as="script"
     />
-    <link rel="preload" href="v1/p2p-media-loader-core_v1.js?v=1" as="script" />
+    <link rel="preload" href="//<%= host %>/v1/p2p-media-loader-core_v1.js?v=1" as="script" />
     <link
       rel="preload"
-      href="v1/p2p-media-loader-hlsjs_v1.js?v=1"
+      href="//<%= host %>/v1/p2p-media-loader-hlsjs_v1.js?v=1"
       as="script"
     />
-    <link rel="preload" href="v1/hlsv1.js?v=1.2" as="script" />
-    <title>All Player V 1.2</title>
-    <script src="v1/func.js"></script>
-    <script src="v1/player.js"></script>
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="assets/style.css"
-    />
+    <link rel="preload" href="//<%= host %>/v1/hlsv1.js?v=1.2" as="script" />
+    <title><%= title %> | Player V 1.2</title>
+    <script src="//<%= host %>/v1/func.js"></script>
+    <script src="//<%= host %>/v1/player.js"></script>
+    <link rel="stylesheet" type="text/css" href="//<%= host %>/assets/style.css" />
     <script
       async
-      src="v1/p2p-media-loader-core_v1.js?v=1"
+      src="//<%= host %>/v1/p2p-media-loader-core_v1.js?v=1"
       type="text/javascript"
     ></script>
+    <style>
+      @keyframes spin {
+        to {
+          transform: rotate(1turn);
+        }
+      }
+      #player_box {
+        height: 100% !important;
+        width: 100% !important;
+      }
+      .load_player{
+        align-items: center;
+        display: flex;
+        justify-content: center;
+      }
+      .load_player {
+        height: 100%;
+      }
+      .load_player svg {
+        height: 88px;
+        width: 88px;
+        fill: #fff;
+        animation: spin 2s linear infinite;
+      }
+    </style>
   </head>
-  <body>
-    <div id="video_container"></div>
+  <body style="margin: 0; padding: 0; background: #000; color: #fff">
+    <div
+      style="
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+      "
+    >
+      <div id="player_box">
+        <div class="load_player">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
+            <path
+              d="M120 186.667a66.667 66.667 0 010-133.333V40a80 80 0 1080 80h-13.333A66.846 66.846 0 01120 186.667z"
+            />
+          </svg>
+        </div>
+      </div>
+    </div>
     <script>
       var md = new MobileDetect(window.navigator.userAgent);
       const P2PPlayer = new vdohide();
-      P2PPlayer.init();
+      P2PPlayer.init("<%= slug %>",<%- JSON.stringify(jwplayer) %>,<%- JSON.stringify(options) %>);
     </script>
   </body>
 </html>

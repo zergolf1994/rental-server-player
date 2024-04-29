@@ -17,7 +17,7 @@ exports.getEmbed = async (req, res) => {
       host: req.get("host"),
       lang: "th",
       jwplayer: {
-        key: "W7zSm81+mmIsg7F+fyHRKhF3ggLkTqtGMhvI92kbqf/ysE99",
+        key: "ITWMv7t88JGzI0xPwW8I0+LveiXX9SWbfdmt0ArUSyc=" || "W7zSm81+mmIsg7F+fyHRKhF3ggLkTqtGMhvI92kbqf/ysE99",
         width: "100%",
         height: "100%",
         preload: "metadata",
@@ -25,6 +25,9 @@ exports.getEmbed = async (req, res) => {
         hlshtml: "true",
         controls: "true",
         horizontalVolumeSlider: true,
+        //androidhls: true,
+        //cast: { appid: "00000000" },
+        pipIcon:"disabled"
       },
       options: {
         p2p_enable: true,
@@ -249,8 +252,8 @@ exports.getEmbed = async (req, res) => {
         ],
       };
     }
-
-    return res.render("embed_p2p", data);
+    return res.render("p2p_v1", data);
+    //return res.render("embed_p2p", data);
   } catch (err) {
     let data = {
       title: `Player`,

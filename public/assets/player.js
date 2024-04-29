@@ -250,9 +250,6 @@ class AppPlayer {
     player.on("ready", function (evt) {
       clientSide.removeBtn();
       clientSide.forwardBtn();
-      /*if (isP2PSupported) {
-        clientSide.addLogo();
-      }*/
     });
 
     player.on("levels", function (e) {
