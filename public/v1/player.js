@@ -104,17 +104,17 @@ class vdohide {
   }
   async initJwPlayer() {
     if (!md.is("iPad") && md.mobile()) {
-      await loadScript("https://content.jwplatform.com/libraries/foHt6P0J.js");
+      await loadScript("https://ssl.p.jwpcdn.com/player/v/8.18.2/jwplayer.js");
       await loadScript(
         "https://cdn.jsdelivr.net/npm/@hola.org/jwplayer-hlsjs@latest/dist/jwplayer.hlsjs.min.js"
       );
     } else if (!md.is("iPad")) {
-      await loadScript("https://content.jwplatform.com/libraries/foHt6P0J.js");
+      await loadScript("https://ssl.p.jwpcdn.com/player/v/8.18.2/jwplayer.js");
       await loadScript(
         "https://cdn.jsdelivr.net/npm/@hola.org/jwplayer-hlsjs@latest/dist/jwplayer.hlsjs.min.js"
       );
     } else {
-      await loadScript("https://content.jwplatform.com/libraries/foHt6P0J.js");
+      await loadScript("https://ssl.p.jwpcdn.com/player/v/8.18.2/jwplayer.js");
     }
 
     var player = jwplayer("player_box");
@@ -230,7 +230,6 @@ class vdohide {
           forwardDisplayButton.ariaLabel = "Forward 10 Seconds";
           forwardDisplayButton.innerHTML = iconForward;
           const nextContainer = document.querySelector(".jw-display-icon-next");
-          console.log(forwardDisplayButton);
           nextContainer.parentNode.insertBefore(
             forwardContainer,
             nextContainer
