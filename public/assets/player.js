@@ -4,7 +4,7 @@ class AppPlayer {
     this.data = data;
     this.option = options;
 
-    this.isP2PSupported = Hls.isSupported() && p2pml.hlsjs.Engine.isSupported();
+    this.isP2PSupported = Hls.isSupported() && p2pml.hlsjs.Engine.isSupported() && this?.option?.p2p_enable;
     if (this.isP2PSupported) {
       this.downloadStats = [];
       this.downloadTotals = { http: 0, p2p: 0 };

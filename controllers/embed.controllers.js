@@ -2,10 +2,12 @@ const { FileModel } = require("../models/file.models");
 const { PlayerModel } = require("../models/player.models");
 const { UserModel } = require("../models/user.models");
 const { remaining } = require("../utils/date");
+const { get_ua } = require("../utils/user-agent.utils");
 
 exports.getEmbed = async (req, res) => {
   try {
     const { slug } = req.params;
+    const ua = get_ua(req?.headers["user-agent"]);
     const domain =
       req.get("host") == "localhost" ? "player.vdohide.com" : req.get("host");
     let data = {
@@ -24,7 +26,9 @@ exports.getEmbed = async (req, res) => {
         controls: "true",
         horizontalVolumeSlider: true,
       },
-      options: {},
+      options: {
+        p2p_enable: true,
+      },
     };
     // get player data
     const player = await PlayerModel.findOne({ domain });
@@ -204,6 +208,10 @@ exports.getEmbed = async (req, res) => {
 
     if (player?.player_options?.video_continue)
       data.options.video_continue = true;
+
+    if (ua?.browser?.name == "Safari" && ua?.device?.vendor == "Safari") {
+      data.options.p2p_enable = false;
+    }
 
     data.jwplayer.skin = {
       controlbar: {
