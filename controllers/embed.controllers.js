@@ -209,7 +209,7 @@ exports.getEmbed = async (req, res) => {
     if (player?.player_options?.video_continue)
       data.options.video_continue = true;
 
-    if (ua?.browser?.name == "Safari" && ua?.device?.vendor == "Safari") {
+    if (ua?.browser?.name == "Safari" && ua?.device?.vendor == "Apple") {
       data.options.p2p_enable = false;
     }
 
