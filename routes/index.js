@@ -4,12 +4,13 @@ const router = express.Router();
 
 
 const { getEmbed } = require("../controllers/embed.controllers");
-const { testUa } = require("../controllers/test.controllers");
+const { testUa, testVideo } = require("../controllers/test.controllers");
 
 router.get("/embed/:slug", getEmbed);
 router.get("/v/:slug", getEmbed);
 
 router.get("/test-ua", testUa);
+router.get("/test", testVideo);
 
 router.use("/server", require("./server.routes"));
 

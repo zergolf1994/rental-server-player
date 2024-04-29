@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mobile-detect/1.4.5/mobile-detect.min.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="referrer" content="no-referrer" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="preload"
+      href="https://content.jwplatform.com/libraries/foHt6P0J.js"
+      as="script"
+    />
+    <link rel="preload" href="v1/p2p-media-loader-core_v1.js?v=1" as="script" />
+    <link
+      rel="preload"
+      href="v1/p2p-media-loader-hlsjs_v1.js?v=1"
+      as="script"
+    />
+    <link rel="preload" href="v1/hlsv1.js?v=1.2" as="script" />
+    <title>All Player V 1.2</title>
+    <script src="v1/func.js"></script>
+    <script src="v1/player.js"></script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="assets/style.css"
+    />
+    <script
+      async
+      src="v1/p2p-media-loader-core_v1.js?v=1"
+      type="text/javascript"
+    ></script>
+  </head>
+  <body>
+    <div id="video_container"></div>
+    <script>
+      var md = new MobileDetect(window.navigator.userAgent);
+      const P2PPlayer = new vdohide();
+      P2PPlayer.init();
+    </script>
+  </body>
+</html>
