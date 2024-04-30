@@ -43,7 +43,7 @@ class vdohide {
       isChrome ||
       isSafari
     )
-      p2pactive = true;
+    this.p2pactive = true;
 
     this.p2pdisable = false;
     if (md.tablet()) this.p2pactive = true;
