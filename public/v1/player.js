@@ -71,6 +71,7 @@ class vdohide {
     if (this.p2pdisable != true) {
       await loadScript("https://cdn.jsdelivr.net/gh/zergolf1994/rental-server-player@main/public/v1/hlsv1.js?v=1.2");
       await loadScript("https://cdn.jsdelivr.net/gh/zergolf1994/rental-server-player@main/public/v1/p2p-media-loader-hlsjs_v1.js?v=1");
+      
       const config = {
         segments: {
           forwardSegmentCount: 50,
