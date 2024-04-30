@@ -73,19 +73,25 @@ class vdohide {
       await loadScript("/v1/p2p-media-loader-hlsjs_v1.js?v=1");
       const config = {
         segments: {
-          swarmId: "test",
+          forwardSegmentCount: 50,
+          swarmId: `vdohide-${this.id}`,
         },
         loader: {
-          httpFailedSegmentTimeout: 10000,
-          consumeOnly: false,
-          httpDownloadMaxPriority: 8,
-          cachedSegmentsCount: 300,
-          requiredSegmentsPriority: 6,
-          simultaneousP2PDownloads: 5,
+          cachedSegmentExpiration: 864e5,
+          cachedSegmentsCount: 1e3,
+          requiredSegmentsPriority: 50,
+          httpDownloadMaxPriority: 9,
+          httpDownloadProbability: 0.06,
+          httpDownloadProbabilityInterval: 1e3,
+          httpDownloadProbabilitySkipIfNoPeers: !0,
+          p2pDownloadMaxPriority: 50,
+          httpFailedSegmentTimeout: 500,
+          simultaneousP2PDownloads: 20,
           simultaneousHttpDownloads: 2,
-          httpDownloadProbabilitySkipIfNoPeers: false,
-          httpDownloadProbabilityInterval: 1000,
-          httpDownloadInitialTimeout: 1,
+          httpDownloadInitialTimeout: 0,
+          httpDownloadInitialTimeoutPerSegment: 17e3,
+          httpUseRanges: !0,
+          maxBufferLength: 300,
           rtcConfig: {
             iceServers: [
               { urls: "stun:stun.l.google.com:19302" },
@@ -137,7 +143,8 @@ class vdohide {
 
     if (this.isP2PSupported && this.p2pactive == true) {
       p2pml.hlsjs.initJwPlayer(player, {
-        liveSyncDurationCount: 7,
+        liveSyncDurationCount: 50,
+        maxBufferLength: 300,
         loader: this.engine.createLoaderClass(),
       });
       player.on("ready", (e) => {
