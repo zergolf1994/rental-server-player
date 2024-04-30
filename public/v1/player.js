@@ -59,7 +59,13 @@ class vdohide {
 
     this.isP2PSupported = p2pml.core.HybridLoader.isSupported();
 
-    this.Restart_Player();
+    await loadScript("https://ssl.p.jwpcdn.com/player/v/8.18.2/jwplayer.js");
+
+    if (this?.data?.advertising) {
+      this.Ad_Player();
+    } else {
+      this.Restart_Player();
+    }
   }
   async Restart_Player() {
     if (this.p2pdisable != true) {
@@ -104,23 +110,25 @@ class vdohide {
   }
   async initJwPlayer() {
     if (!md.is("iPad") && md.mobile()) {
-      await loadScript("https://ssl.p.jwpcdn.com/player/v/8.18.2/jwplayer.js");
+      // await loadScript("https://ssl.p.jwpcdn.com/player/v/8.32.1/jwplayer.js");
       await loadScript(
         "https://cdn.jsdelivr.net/npm/@hola.org/jwplayer-hlsjs@latest/dist/jwplayer.hlsjs.min.js"
       );
     } else if (!md.is("iPad")) {
-      await loadScript("https://ssl.p.jwpcdn.com/player/v/8.18.2/jwplayer.js");
+      //await loadScript("https://ssl.p.jwpcdn.com/player/v/8.32.1/jwplayer.js");
       await loadScript(
         "https://cdn.jsdelivr.net/npm/@hola.org/jwplayer-hlsjs@latest/dist/jwplayer.hlsjs.min.js"
       );
     } else {
-      await loadScript("https://ssl.p.jwpcdn.com/player/v/8.18.2/jwplayer.js");
+      //await loadScript("https://ssl.p.jwpcdn.com/player/v/8.32.1/jwplayer.js");
     }
 
     var player = jwplayer("player_box");
     var json = {
       ...this.data,
     };
+
+    delete json?.advertising;
     player.setup(json);
 
     if (this.p2pdisable != true) {
@@ -131,6 +139,9 @@ class vdohide {
       p2pml.hlsjs.initJwPlayer(player, {
         liveSyncDurationCount: 7,
         loader: this.engine.createLoaderClass(),
+      });
+      player.on("ready", (e) => {
+        if (this.data?.advertising) player.play();
       });
     }
 
@@ -317,5 +328,18 @@ class vdohide {
     /*player.on("bufferChange", (e) => {
       console.log(e);
     });*/
+  }
+  async Ad_Player() {
+    const data = this.data;
+    var player = jwplayer("player_box");
+    var json = {
+      ...this.data,
+      sources: [{ file: "/assets/1sec.mp4", type: "mp4" }],
+    };
+    player.setup(json);
+    player.once("play", (e) => {
+      player.remove();
+      this.Restart_Player();
+    });
   }
 }

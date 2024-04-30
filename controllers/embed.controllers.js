@@ -9,7 +9,7 @@ exports.getEmbed = async (req, res) => {
     const { slug } = req.params;
     const ua = get_ua(req?.headers["user-agent"]);
     const domain =
-      req.get("host") == "localhost" ? "player.vdohide.com" : req.get("host");
+      req.get("host") == "localhost" ? "online.playhls.xyz" : req.get("host");
     let data = {
       title: `Player`,
       base_color: `#ff0000`,
