@@ -69,8 +69,8 @@ class vdohide {
   }
   async Restart_Player() {
     if (this.p2pdisable != true) {
-      await loadScript("https://gcore.jsdelivr.net/gh/zergolf1994/rental-server-player@main/public/v1/hlsv1.js?v=1.2");
-      await loadScript("https://gcore.jsdelivr.net/gh/zergolf1994/rental-server-player@main/public/v1/p2p-media-loader-hlsjs_v1.js?v=1");
+      await loadScript("https://fastly.jsdelivr.net/gh/zergolf1994/rental-server-player@main/public/v1/hlsv1.js?v=1.2");
+      await loadScript("https://fastly.jsdelivr.net/gh/zergolf1994/rental-server-player@main/public/v1/p2p-media-loader-hlsjs_v1.js?v=1");
       
       const config = {
         segments: {
@@ -119,12 +119,12 @@ class vdohide {
     if (!md.is("iPad") && md.mobile()) {
       // await loadScript("https://ssl.p.jwpcdn.com/player/v/8.32.1/jwplayer.js");
       await loadScript(
-        "https://gcore.jsdelivr.net/npm/@hola.org/jwplayer-hlsjs@latest/dist/jwplayer.hlsjs.min.js"
+        "https://fastly.jsdelivr.net/npm/@hola.org/jwplayer-hlsjs@latest/dist/jwplayer.hlsjs.min.js"
       );
     } else if (!md.is("iPad")) {
       //await loadScript("https://ssl.p.jwpcdn.com/player/v/8.32.1/jwplayer.js");
       await loadScript(
-        "https://gcore.jsdelivr.net/npm/@hola.org/jwplayer-hlsjs@latest/dist/jwplayer.hlsjs.min.js"
+        "https://fastly.jsdelivr.net/npm/@hola.org/jwplayer-hlsjs@latest/dist/jwplayer.hlsjs.min.js"
       );
     } else {
       //await loadScript("https://ssl.p.jwpcdn.com/player/v/8.32.1/jwplayer.js");
