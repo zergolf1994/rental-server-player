@@ -6,28 +6,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex" />
     <title><%= title %></title>
-    <link
-      rel="preload"
-      href="https://ssl.p.jwpcdn.com/player/v/8.32.1/jwplayer.js"
-      as="script"
-    />
-    <script src="https://ssl.p.jwpcdn.com/player/v/8.32.1/jwplayer.js"></script>
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="//<%= host %>/assets/style.css"
-    />
     <style>
-      :root {
-        --base-color: <%= base_color %>;
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        height: 100dvh;
+        background-color: #000;
+        overflow: hidden;
+      }
+      iframe {
+        width: 100%;
+        height: 100%;
       }
     </style>
+    <script>
+      const allow = ["<%- allow %>"];
+      if (!allow?.includes(top.location.host)) {
+        //window.location="https://www.google.com";
+      }
+      if (top.location == self.location) {
+        console.log("top", top.location);
+        console.log("self", self.location);
+        //window.location="https://www.google.com";
+      }
+    </script>
   </head>
   <body>
-    <div id="player"></div>
-    <script>
-      const player = jwplayer("player")
-      player.setup(<%- JSON.stringify(jwplayer) %>)
-    </script>
+    <% if(!!iframe_url){ %>
+    <iframe src="<%= iframe_url %>" frameborder="0" allowfullscreen></iframe>
+    <% } %>
   </body>
 </html>

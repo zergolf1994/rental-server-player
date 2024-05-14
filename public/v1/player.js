@@ -119,12 +119,12 @@ class vdohide {
     if (!md.is("iPad") && md.mobile()) {
       // await loadScript("https://ssl.p.jwpcdn.com/player/v/8.32.1/jwplayer.js");
       await loadScript(
-        "https://fastly.jsdelivr.net/npm/@hola.org/jwplayer-hlsjs@latest/dist/jwplayer.hlsjs.min.js"
+        "https://cdn.jsdelivr.net/npm/@hola.org/jwplayer-hlsjs@latest/dist/jwplayer.hlsjs.min.js"
       );
     } else if (!md.is("iPad")) {
       //await loadScript("https://ssl.p.jwpcdn.com/player/v/8.32.1/jwplayer.js");
       await loadScript(
-        "https://fastly.jsdelivr.net/npm/@hola.org/jwplayer-hlsjs@latest/dist/jwplayer.hlsjs.min.js"
+        "https://cdn.jsdelivr.net/npm/@hola.org/jwplayer-hlsjs@latest/dist/jwplayer.hlsjs.min.js"
       );
     } else {
       //await loadScript("https://ssl.p.jwpcdn.com/player/v/8.32.1/jwplayer.js");

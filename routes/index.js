@@ -3,11 +3,11 @@ const express = require("express");
 const router = express.Router();
 
 
-const { getEmbed } = require("../controllers/embed.controllers");
+const { getEmbed, getVembed } = require("../controllers/embed.controllers");
 const { testUa, testVideo } = require("../controllers/test.controllers");
 
 router.get("/embed/:slug", getEmbed);
-router.get("/v/:slug", getEmbed);
+router.get("/v/:slug", getVembed);
 
 router.get("/test-ua", testUa);
 router.get("/test", testVideo);
